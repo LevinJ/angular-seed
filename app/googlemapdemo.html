@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>Google Map Test</title> 
+        <style type="text/css">
+            html { height: 100% }
+            body { height: 100%; margin: 0; padding: 0 }
+            #map-canvas { height: 100% }
+        </style>
+        <script type="text/javascript" src="geoutil.js">
+        </script>
+        <script type="text/javascript"
+                src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDuv3IzMDWqGROZM4LtcSJdHqNegFLukmo&sensor=false&v=3">
+        </script>
+        <script type="text/javascript">
+            function showMap(myLatlng) {
+                var mapOptions = {
+                    center: myLatlng,
+                    zoom: 18
+                };
+                var map = new google.maps.Map(document.getElementById("map-canvas"),
+                        mapOptions);
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    title: "Hello World!"
+                });
+
+                // To add the marker to the map, call setMap();
+                marker.setMap(map);
+            }
+            function initialize() {
+                function success(pos) {
+                    var crd = pos.coords;
+                    var myLatlng = new google.maps.LatLng(crd.latitude, crd.longitude);
+                    showMap(myLatlng);
+                    console.log('Your current position is:');
+                    console.log('Latitude : ' + crd.latitude);
+                    console.log('Longitude: ' + crd.longitude);
+                    console.log('More or less ' + crd.accuracy + ' meters.');
+                }
+                g_pos.getCurrentPosition(success);
+//                var myLatlng = new google.maps.LatLng(31.250162, 121.580714);
+
+//                var myLatlng4 = new google.maps.LatLng(31.249645, 121.571907);
+//                var myLatlng1 = new google.maps.LatLng(31.247911, 121.578679);
+//                var myLatlng2 = new google.maps.LatLng(31.250162, 121.580714);
+//                var myLatlng3 = new google.maps.LatLng(31.255198, 121.585146);
+//                var flightPlanCoordinates = [
+//                    myLatlng4,
+//                    myLatlng1,
+//                    myLatlng2,
+//                    myLatlng3
+//                ];
+//                var flightPath = new google.maps.Polyline({
+//                    path: flightPlanCoordinates,
+//                    geodesic: true,
+//                    strokeColor: '#FF0000',
+//                    strokeOpacity: 1.0,
+//                    strokeWeight: 2
+//                });
+//
+//                flightPath.setMap(map);
+
+            }
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+    </head>
+    <body>
+        <div id="map-canvas"/>
+    </body>
+</html>
