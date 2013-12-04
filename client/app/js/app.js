@@ -16,7 +16,7 @@ angular.module('myApp', [
         $routeProvider.when('/view3/:chapterId/Section/:sectionId', {templateUrl: 'partials/book.html', controller: 'MyCtrl3'});
         $routeProvider.when('/login', {
             templateUrl: 'partials/login.html', 
-            controller: 'MyCtrl4',
+            controller: 'LoginCtrl',
             access:         access.anon
         });
         $routeProvider.when('/home', {
@@ -24,18 +24,23 @@ angular.module('myApp', [
             controller: 'HomeCtrl',
             access:         access.user
         });
-        $routeProvider.otherwise({redirectTo: '/view1'});
-    }]).
-        run(['$rootScope', '$location', 'Auth', function($rootScope, $location, Auth) {
-
-        $rootScope.$on("$routeChangeStart", function(event, next, current) {
-            $rootScope.error = null;
-            if (!Auth.authorize(next.access)) {
-                if (Auth.isLoggedIn())
-                    $location.path('/');
-                else
-                    $location.path('/login');
-            }
+        $routeProvider.when('/account', {
+            templateUrl: 'partials/account.html', 
+            controller: 'AccountCtrl',
+            access:         access.anon
         });
+        $routeProvider.otherwise({redirectTo: '/view1'});
+    }]);//.
+     //   run(['$rootScope', '$location', 'Auth', function($rootScope, $location, Auth) {
 
-    }]);
+//        $rootScope.$on("$routeChangeStart", function(event, next, current) {
+//            $rootScope.error = null;
+//            if (!Auth.authorize(next.access)) {
+//                if (Auth.isLoggedIn())
+//                    $location.path('/');
+//                else
+//                    $location.path('/login');
+//            }
+//        });
+
+ //   }]);

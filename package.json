@@ -2,6 +2,18 @@
   "name": "angularjs-seed",
   "description": "A starter project for AngularJS",
   "repository": "https://github.com/angular/angular-seed",
+  "dependencies": {
+    "express": "*",
+    "jade": "*",
+    "passport": "*",
+    "passport-local": "*",
+    "underscore": "*",
+    "validator": "~1.1.1",
+    "passport-twitter": "~0.1.4",
+    "passport-facebook": "~0.1.5",
+    "passport-google": "~0.3.0",
+    "passport-linkedin": "~0.1.3"
+  },
   "devDependencies": {
     "phantomjs" : "~1.9",
     "karma" : "~0.10",

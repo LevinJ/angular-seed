@@ -6,13 +6,21 @@
   <link rel="stylesheet" href="css/app.css"/>
 </head>
 <body>
-  <ul class="menu">
+    <div ng-controller="NavCtrl">
+        <ul class="menu" >
     <li><a href="#/view1">view1</a></li>
     <li><a href="#/view2">view2</a></li>
     <li><a href="#/view3/1/Section/2?search=moby">view3</a></li>
     <li><a href="#/login">login</a></li>
       <li><a href="#/home">home</a></li>
+       <li><a href="#/account">Account</a></li>
+       <li><a href="#" ng-click="logout()">Log out</a></li>
   </ul>
+        <div>
+            Welcome {{ user.username }} {{user.role.title}}
+        </div>
+    </div>
+  
 
   <div ng-view></div>
 
@@ -21,6 +29,7 @@
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
   -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
   <script src="lib/angular/angular.js"></script>
   <script src="lib/angular/angular-cookies.min.js"></script>
   <script src="lib/angular/angular-route.js"></script>
