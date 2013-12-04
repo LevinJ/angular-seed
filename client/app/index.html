@@ -8,13 +8,13 @@
 <body>
     <div ng-controller="NavCtrl">
         <ul class="menu" >
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-    <li><a href="#/view3/1/Section/2?search=moby">view3</a></li>
-    <li><a href="#/login">login</a></li>
-      <li><a href="#/home">home</a></li>
+    <li><a href="#/login">Log in</a></li>
+    <li><a href="#/register">Register</a></li>
+    <li><a href="#" ng-click="logout()">Log out</a></li>
+    <li><a href="#/home">Home</a></li>
+    <li><a href="#/private">Private</a></li>
        <li><a href="#/account">Account</a></li>
-       <li><a href="#" ng-click="logout()">Log out</a></li>
+       
   </ul>
         <div>
             Welcome {{ user.username }} {{user.role.title}}

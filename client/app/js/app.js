@@ -11,9 +11,12 @@ angular.module('myApp', [
 ]).
         config(['$routeProvider', function($routeProvider) {
         var access = routingConfig.accessLevels;
-        $routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: 'MyCtrl1'});
-        $routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: 'MyCtrl2'});
-        $routeProvider.when('/view3/:chapterId/Section/:sectionId', {templateUrl: 'partials/book.html', controller: 'MyCtrl3'});
+        $routeProvider.when('/register', {
+            templateUrl: 'partials/register.html', 
+            controller: 'RegisterCtrl'});
+        $routeProvider.when('/private', {
+            templateUrl: 'partials/private.html', 
+            controller: 'PrivateCtrl'});
         $routeProvider.when('/login', {
             templateUrl: 'partials/login.html', 
             controller: 'LoginCtrl',
@@ -29,7 +32,7 @@ angular.module('myApp', [
             controller: 'AccountCtrl',
             access:         access.anon
         });
-        $routeProvider.otherwise({redirectTo: '/view1'});
+        $routeProvider.otherwise({redirectTo: '/home'});
     }]);//.
      //   run(['$rootScope', '$location', 'Auth', function($rootScope, $location, Auth) {
 
