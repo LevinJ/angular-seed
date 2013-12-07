@@ -76,6 +76,9 @@ angular.module('myApp.controllers', []).
                             });
                 };
             }])
+        .controller('AdminCtrl', [function() {
+
+    }])
         .controller('PrivateCtrl', [function() {
 
     }]);

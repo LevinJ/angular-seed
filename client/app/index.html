@@ -30,7 +30,7 @@
                             <a href="#/account">Accont</a>
                         </li>
                         <li data-access-level="accessLevels.admin" active-nav>
-                            <a href="/admin">Admin</a>
+                            <a href="#/admin">Admin</a>
                         </li>
                     </ul>
                     <div class="pull-right" data-access-level="accessLevels.user" id="userInfo" >Welcome {{ user.username }} {{user.role.title}};
@@ -42,6 +42,7 @@
         <div ng-view></div>
 
         <div>Angular seed app: v<span app-version></span></div>
+        <div>{{error}}</div>
 
         <!-- In production use:
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>

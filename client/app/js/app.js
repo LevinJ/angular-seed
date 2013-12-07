@@ -32,6 +32,11 @@ angular.module('myApp', [
             controller: 'AccountCtrl',
             access:         access.anon
         });
+        $routeProvider.when('/admin', {
+            templateUrl: 'partials/admin.html', 
+            controller: 'AdminCtrl',
+            access:         access.admin
+        });
         $routeProvider.otherwise({redirectTo: '/home'});
     }]);//.
      //   run(['$rootScope', '$location', 'Auth', function($rootScope, $location, Auth) {

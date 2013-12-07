@@ -9,16 +9,18 @@ angular.module('myApp.services', ['ngCookies']).
   value('version', '0.2');
 
 angular.module('myApp.services')
-.factory('Auth', function($http, $cookieStore){
+.factory('Auth', ['$http','$cookieStore','currentUserStorage',
+    function($http, $cookieStore, currentUserStorage){
 
     var accessLevels = routingConfig.accessLevels
         , userRoles = routingConfig.userRoles
-        , currentUser = $cookieStore.get('user') || { username: '', role: userRoles.public };
+        , currentUser = currentUserStorage.get() || { username: '', role: userRoles.public };
 
     $cookieStore.remove('user');
 
     function changeUser(user) {
         _.extend(currentUser, user);
+        currentUserStorage.put(currentUser);
     };
 
     return {
@@ -38,6 +40,10 @@ angular.module('myApp.services')
                 changeUser(res);
                 success();
             }).error(error);
+//            .error(function(err){
+//                console.log(err);
+//                error(err);
+//            });
         },
         login: function(user, success, error) {
             $http.post('/login', user).success(function(user){
@@ -58,7 +64,7 @@ angular.module('myApp.services')
         userRoles: userRoles,
         user: currentUser
     };
-});
+}]);
 
 angular.module('myApp.services')
 .factory('Users', function($http) {
@@ -67,4 +73,22 @@ angular.module('myApp.services')
             $http.get('/users').success(success).error(error);
         }
     };
+});
+
+/**
+ * Services that persists and retrieves the current user/role from localStorage
+ */
+angular.module('myApp.services')
+        .factory('currentUserStorage', function () {
+	var STORAGE_ID = 'currentuser-login';
+
+	return {
+		get: function () {
+			return JSON.parse(localStorage.getItem(STORAGE_ID));
+		},
+
+		put: function (todos) {
+			localStorage.setItem(STORAGE_ID, JSON.stringify(todos));
+		}
+	};
 });
