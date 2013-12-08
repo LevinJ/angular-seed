@@ -11,7 +11,6 @@ angular.module('myApp.services', ['ngCookies']).
 angular.module('myApp.services')
 .factory('Auth', ['$http','$cookieStore','currentUserStorage',
     function($http, $cookieStore, currentUserStorage){
-    $http.defaults.useXDomain = true;
     var accessLevels = routingConfig.accessLevels
         , userRoles = routingConfig.userRoles
         , currentUser = currentUserStorage.get() || { username: '', role: userRoles.public };
@@ -40,10 +39,6 @@ angular.module('myApp.services')
                 changeUser(res);
                 success();
             }).error(error);
-//            .error(function(err){
-//                console.log(err);
-//                error(err);
-//            });
         },
         login: function(user, success, error) {
             var url = "http://localhost:8002/" + 'login';
@@ -53,7 +48,7 @@ angular.module('myApp.services')
             }).error(error);
         },
         logout: function(success, error) {
-            $http.post('/logout').success(function(){
+            $http.post('http://localhost:8002/logout').success(function(){
                 changeUser({
                     username: '',
                     role: userRoles.public

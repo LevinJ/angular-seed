@@ -55,7 +55,7 @@ angular.module('myApp.controllers', ['ngAnimate']).
                     $window.location.href = '/auth/' + provider;
                 };
             }])
-       
+
         .controller('AccountCtrl', ['$scope', 'Auth',
     function($scope, Auth) {
         $scope.currentuser = Auth.user;
@@ -90,6 +90,33 @@ angular.module('myApp.controllers', ['ngAnimate']).
         .controller('AdminCtrl', [function() {
 
     }])
-        .controller('PrivateCtrl', [function() {
+        .controller('PrivateCtrl', ['$scope', '$http', function($scope, $http) {
+        $scope.useHttp = function() {
+            $http.get('http://localhost:8002/helloworld')
+                    .success(function(data) {
+                alert(data.helloword);
+            });
+        };
 
+        $scope.postHttp = function() {
+
+            $http.post('http://localhost:8002/helloworld')
+                    .success(function(data) {
+                alert(data.helloword);
+            });
+        };
+        $scope.putHttp = function() {
+
+            $http.put('http://localhost:8002/helloworld')
+                    .success(function(data) {
+                alert(data.helloword);
+            });
+        };
+        $scope.deleteHttp = function() {
+
+            $http.delete('http://localhost:8002/helloworld')
+                    .success(function(data) {
+                alert(data.helloword);
+            });
+        };
     }]);

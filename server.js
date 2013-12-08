@@ -34,6 +34,7 @@ passport.serializeUser(User.serializeUser);
 passport.deserializeUser(User.deserializeUser);
 
 require('./server/routes.js')(app);
+require('./server/controllers/testcontroller.js')(app);
 
 app.set('port', process.env.PORT || 8002);
 
