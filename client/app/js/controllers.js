@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', []).
+angular.module('myApp.controllers', ['ngAnimate']).
         controller('MyCtrl1', [function() {
 
     }])
@@ -18,6 +18,20 @@ angular.module('myApp.controllers', []).
                 $rootScope.error = "Failed to logout";
             });
         };
+
+        $rootScope.togglesidebar = false;
+
+        $scope.toggleSidebarClick = function() {
+            $rootScope.togglesidebar = !$rootScope.togglesidebar;
+        };
+    }])
+        .controller('ContentCtrl', ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
+//        $('#slider').height(function(index, height) {
+//            console.log(window.innerHeight);
+//            console.log($(this).offset().top);
+//            console.log(window.innerHeight - $(this).offset().top);
+//            return window.innerHeight - $(this).offset().top;
+//        });
     }])
         .controller('LoginCtrl',
         ['$rootScope', '$scope', '$location', '$window', 'Auth', function($rootScope, $scope, $location, $window, Auth) {
@@ -41,10 +55,7 @@ angular.module('myApp.controllers', []).
                     $window.location.href = '/auth/' + provider;
                 };
             }])
-        .controller('HomeCtrl', ['$scope', '$location', '$route', '$routeParams', 'version',
-    function($scope, $location, $route, $routeParams, version) {
-
-    }])
+       
         .controller('AccountCtrl', ['$scope', 'Auth',
     function($scope, Auth) {
         $scope.currentuser = Auth.user;

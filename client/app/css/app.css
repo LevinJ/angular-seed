@@ -1,30 +1,22 @@
 /* app css stylesheet */
-
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+#container{
+    position:relative;
 }
-
-.menu:before {
-  content: "[";
+#slider{
+    background:rgb(85, 83, 80);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width:80%;
+    /*overflow: scroll;*/
+    color: white;
 }
-
-.menu:after {
-  content: "]";
+#slider div{
+   padding: 10px;
+   border-bottom-width: 1px;
+   border-bottom-color: white;
+   border-bottom-style: solid;
 }
-
-.menu > li {
-  display: inline;
-}
-
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
+#map{
+    background:green;
 }

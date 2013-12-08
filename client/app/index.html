@@ -2,6 +2,7 @@
 <html lang="en" ng-app="myApp">
     <head>
         <meta charset="utf-8">
+         <meta name="viewport" content="width=device-width">
         <title>My AngularJS App</title>
         <link rel="stylesheet" href="css/app.css"/>
         <link rel="stylesheet" href="css/bootstrap.css">
@@ -21,7 +22,7 @@
                             <a data-ng-click="logout()" href="">Log out</a>
                         </li>
                         <li  data-access-level="accessLevels.public" active-nav>
-                            <a href="#/home">Home</a>
+                            <a data-ng-click="toggleSidebarClick()" href="#/home">Home</a>
                         </li>
                         <li  data-access-level="accessLevels.user" active-nav>
                             <a href="#/private">Private</a>
@@ -32,6 +33,7 @@
                         <li data-access-level="accessLevels.admin" active-nav>
                             <a href="#/admin">Admin</a>
                         </li>
+                       
                     </ul>
                     <div class="pull-right" data-access-level="accessLevels.user" id="userInfo" >Welcome {{ user.username }} {{user.role.title}};
 
@@ -39,23 +41,32 @@
                 </div>
             </div>
         </div>
-        <div ng-view></div>
-
-        <div>Angular seed app: v<span app-version></span></div>
-        <div>{{error}}</div>
+         <div id="container" ng-controller="ContentCtrl">
+            <div id="slider" ng-show="togglesidebar">
+                <div>Map</div>
+                <div>Route</div>
+                <div>Messages</div>
+                <div>Setting</div>
+            </div>
+            <div id="map" ng-view>map</div>
+        </div>
 
         <!-- In production use:
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
         -->
-
+        <script type="text/javascript" src="lib/jquery.js"></script>
+         <script type="text/javascript" src="lib/baiduconvertor.js"></script>
+        <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=A7dfcf11e6de6b76103a36fdb226cf01"></script> 
         <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
         <script src="lib/angular/angular.js"></script>
         <script src="lib/angular/angular-cookies.min.js"></script>
         <script src="lib/angular/angular-route.js"></script>
+        <script src="lib/angular/angular-animate.js"></script>
         <script src="js/routingConfig.js"></script>
         <script src="js/app.js"></script>
         <script src="js/services.js"></script>
         <script src="js/controllers.js"></script>
+         <script src="js/mapcontroller.js"></script>
         <script src="js/filters.js"></script>
         <script src="js/directives.js"></script>
     </body>

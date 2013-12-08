@@ -8,11 +8,13 @@ var app = module.exports = express();
 
 //app.set('views', __dirname + '/client/app');
 //app.set('view engine', 'jade');
+var middlewares = require('./middlewares.js')(app);
 app.use(express.logger('dev'))
 app.use(express.cookieParser());
 app.use(express.json());
 app.use(express.urlencoded());
 //app.use(express.bodyParser());
+app.use(middlewares.allowCrossDomain);
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'client/app')));
 app.use(express.cookieSession(
