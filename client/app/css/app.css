@@ -10,10 +10,13 @@
     width:80%;
     /*overflow: scroll;*/
     color: white;
+    z-index: 1;
+    margin-top:-18px;
 }
-#slider div{
+#slider span{
    padding: 10px;
-   border-bottom-width: 1px;
+    display:         block;
+  border-bottom-width: 1px;
    border-bottom-color: white;
    border-bottom-style: solid;
 }

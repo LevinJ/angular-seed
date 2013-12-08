@@ -37,7 +37,12 @@ angular.module('myApp', [
             controller: 'AdminCtrl',
             access:         access.admin
         });
-        $routeProvider.otherwise({redirectTo: '/home'});
+        $routeProvider.when('/route', {
+            templateUrl: 'partials/route.html', 
+            controller: 'RouteCtrl',
+            access:         access.user
+        });
+        $routeProvider.otherwise({redirectTo: '/more'});
     }]);//.
      //   run(['$rootScope', '$location', 'Auth', function($rootScope, $location, Auth) {
 

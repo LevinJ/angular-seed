@@ -2,7 +2,7 @@
 
 /* Services */
 
-var g_webhostbaseurl = "http://localhost:8002/";
+var g_webhostbaseurl = g_webhostbaseurl|| ("http://localhost:8002/");
 // Demonstrate how to register services
 // In this case it is a simple value service.
 angular.module('myApp.services', ['ngCookies']).

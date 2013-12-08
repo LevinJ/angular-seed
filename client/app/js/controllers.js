@@ -21,7 +21,7 @@ angular.module('myApp.controllers', ['ngAnimate']).
 
         $rootScope.togglesidebar = false;
 
-        $scope.toggleSidebarClick = function() {
+        $rootScope.toggleSidebarClick = function() {
             $rootScope.togglesidebar = !$rootScope.togglesidebar;
         };
     }])
@@ -90,6 +90,10 @@ angular.module('myApp.controllers', ['ngAnimate']).
         .controller('AdminCtrl', [function() {
 
     }])
+        .controller('RouteCtrl', [function() {
+
+    }])
+
         .controller('PrivateCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.useHttp = function() {
             $http.get('http://localhost:8002/helloworld')
