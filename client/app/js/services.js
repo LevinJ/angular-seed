@@ -2,7 +2,7 @@
 
 /* Services */
 
-
+var g_webhostbaseurl = "http://localhost:8002/";
 // Demonstrate how to register services
 // In this case it is a simple value service.
 angular.module('myApp.services', ['ngCookies']).
@@ -35,20 +35,20 @@ angular.module('myApp.services')
             return user.role.title == userRoles.user.title || user.role.title == userRoles.admin.title;
         },
         register: function(user, success, error) {
-            $http.post('/register', user).success(function(res) {
+            $http.post(g_webhostbaseurl + 'register', user).success(function(res) {
                 changeUser(res);
                 success();
             }).error(error);
         },
         login: function(user, success, error) {
-            var url = "http://localhost:8002/" + 'login';
+            var url = g_webhostbaseurl + 'login';
             $http.post(url, user).success(function(user){
                 changeUser(user);
                 success(user);
             }).error(error);
         },
         logout: function(success, error) {
-            $http.post('http://localhost:8002/logout').success(function(){
+            $http.post(g_webhostbaseurl + 'logout').success(function(){
                 changeUser({
                     username: '',
                     role: userRoles.public
