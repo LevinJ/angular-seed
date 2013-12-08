@@ -19,7 +19,7 @@
                             <a href="#/register">Register</a>
                         </li>
                         <li data-access-level="accessLevels.user" >
-                            <a data-ng-click="logout()" href="">Log out</a>
+                            <a data-ng-click="logout()" href="#">Log out</a>
                         </li>
                         <li  data-access-level="accessLevels.public" active-nav>
                             <a  href="#/home">Home</a>
@@ -27,9 +27,7 @@
                         <li  data-access-level="accessLevels.user" active-nav>
                             <a href="#/private">Private</a>
                         </li>
-                         <li  data-access-level="accessLevels.user" active-nav>
-                            <span data-ng-click="toggleSidebarClick()">More</span>
-                        </li>
+                       
                         <li  data-access-level="accessLevels.user" active-nav>
                             <a href="#/account">Accont</a>
                         </li>
@@ -39,7 +37,7 @@
                        
                     </ul>
                     <div class="pull-right" data-access-level="accessLevels.user" id="userInfo" >Welcome {{ user.username }} {{user.role.title}};
-
+                            <span data-ng-click="toggleSidebarClick()">More</span>
                     </div>
                 </div>
             </div>

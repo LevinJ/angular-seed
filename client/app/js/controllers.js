@@ -90,8 +90,16 @@ angular.module('myApp.controllers', ['ngAnimate']).
         .controller('AdminCtrl', [function() {
 
     }])
-        .controller('RouteCtrl', [function() {
-
+        .controller('RouteCtrl', ['getposition','$scope',function(getposition,$scope) {
+             $scope.positions=[];
+                $scope.getposition= function(){
+                    getposition.get(function(position){
+                        $scope.positions.push(position);
+                console.log(position);
+            },function(error){
+                console.log(error);
+            });
+                };
     }])
 
         .controller('PrivateCtrl', ['$scope', '$http', function($scope, $http) {

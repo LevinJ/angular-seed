@@ -16,3 +16,26 @@ angular.module('myApp.services').factory('latitudelongitude', ['$http', function
             }
         };
     }]);
+angular.module('myApp.services').factory('getposition', ['$http', function($http) {
+        var timeoutVal = 5 * 1000*3;
+        var options = {
+            enableHighAccuracy: true,
+            timeout: timeoutVal,
+            maximumAge: 0
+        };
+        
+        return {
+            get: function(success, error) {
+                //navigator.geolocation.getCurrentPosition(success, error, options);
+                var position = {};
+                position.coords = {};
+                position.coords.latitude=31.2539564;
+                position.coords.longitude=121.5784224;
+                position.coords.altitude=0;
+                position.coords.accuracy=136;
+                success(position)
+            }};
+	
+	
+
+}]);
