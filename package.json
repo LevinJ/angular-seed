@@ -12,13 +12,14 @@
     "passport-twitter": "~0.1.4",
     "passport-facebook": "~0.1.5",
     "passport-google": "~0.3.0",
-    "passport-linkedin": "~0.1.3"
+    "passport-linkedin": "~0.1.3",
+    "mongoskin": "~0.6.1"
   },
   "devDependencies": {
-    "phantomjs" : "~1.9",
-    "karma" : "~0.10",
-    "karma-junit-reporter" : "~0.1",
-    "karma-jasmine" : "~0.1",
-    "karma-ng-scenario" : "~0.1"
+    "phantomjs": "~1.9",
+    "karma": "~0.10",
+    "karma-junit-reporter": "~0.1",
+    "karma-jasmine": "~0.1",
+    "karma-ng-scenario": "~0.1"
   }
 }
