@@ -92,25 +92,22 @@ angular.module('myApp.controllers', ['ngAnimate']).
     }])
         .controller('RouteCtrl', ['getposition','$scope','latitudelongitude',function(getposition,$scope,latitudelongitude) {
              $scope.positions=[];
-                $scope.getposition= function(){
-                    getposition.get(function(position){
-                        //$scope.positions.push(position);
-                        latitudelongitude.post(position,function(){
-                            
-                             latitudelongitude.get(function(data){
-                            $scope.positions = data;
-                        },function(data){
-                            
-                        });
-                            
-                        },function(){});
-                       
-                        
-                console.log(position);
-            },function(error){
-                console.log(error);
-            });
-                };
+             $scope.getposition= function(){
+                    getposition.get()
+                    .then(function(value){
+                        return latitudelongitude.post(value);
+                    }) 
+                     .then(function(value){
+                        return latitudelongitude.get();
+                     })
+                     .then(function(value){
+                            $scope.positions = value.data.result;
+                     })
+                     .catch(function(reason){
+                        console.log(reason);
+                     });
+                 ;
+             };
     }])
 
         .controller('PrivateCtrl', ['$scope', '$http', function($scope, $http) {
