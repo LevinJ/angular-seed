@@ -4,16 +4,29 @@
  * and open the template in the editor.
  */
 
+var mongoskin = require('mongoskin');
+var db = mongoskin.db('localhost:27017/geotrackerdb?auto_reconnect=true', {safe: true});
 
-var db = mongoskin.db('localhost:27017/geotrackerdb?auto_reconnect=true');
-
-
+module.exports=db;
 db.bind('positions', {
-  findTop10 : function (fn) {
-   this.find({}, {limit:10, sort:[['views', -1]]}).toArray(fn);
-  },
-  removeTagWith : function (tag, fn) {
-   this.remove({tags:tag},fn);
-  }
- } 
-})
+    qeuryPositions: function(cb) {
+        this.find().toArray(function(err, result) {
+            cb(err, result);
+            console.dir(err);
+            console.dir(result);
+        });
+    },
+    insertPosition: function(position, cb) {
+        this.insert(position, function(err, result) {
+            cb(err, result);
+            console.dir(err);
+            console.dir(result);
+        });
+    }
+}
+);
+
+//db.positions.insertPosition({vow:"hello"},function(){});
+//db.positions.insertPosition({vow2:"hello2"},function(){});
+//
+//db.positions.qeuryPositions(function(){});

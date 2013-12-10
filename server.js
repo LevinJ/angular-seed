@@ -37,6 +37,7 @@ require('./server/routes.js')(app);
 require('./server/controllers/testcontroller.js')(app);
 require('./server/controllers/mapcontroller.js')(app);
 
+
 app.set('port', process.env.PORT || 8002);
 
 //app.listen(8000);

@@ -7,7 +7,7 @@ var g_webhostbaseurl = g_webhostbaseurl || ("http://localhost:8002/");
  */
 angular.module('myApp.services').factory('latitudelongitude', ['$http', function($http) {
         return {
-            get: function(position, success, error) {
+            get: function(success, error) {
                 $http.get(g_webhostbaseurl + 'position').success(success).error(error);
             },
             post: function(position, success, error) {

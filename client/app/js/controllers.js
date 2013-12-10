@@ -90,11 +90,22 @@ angular.module('myApp.controllers', ['ngAnimate']).
         .controller('AdminCtrl', [function() {
 
     }])
-        .controller('RouteCtrl', ['getposition','$scope',function(getposition,$scope) {
+        .controller('RouteCtrl', ['getposition','$scope','latitudelongitude',function(getposition,$scope,latitudelongitude) {
              $scope.positions=[];
                 $scope.getposition= function(){
                     getposition.get(function(position){
-                        $scope.positions.push(position);
+                        //$scope.positions.push(position);
+                        latitudelongitude.post(position,function(){
+                            
+                             latitudelongitude.get(function(data){
+                            $scope.positions = data;
+                        },function(data){
+                            
+                        });
+                            
+                        },function(){});
+                       
+                        
                 console.log(position);
             },function(error){
                 console.log(error);
