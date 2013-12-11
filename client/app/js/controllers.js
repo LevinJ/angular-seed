@@ -90,26 +90,7 @@ angular.module('myApp.controllers', ['ngAnimate']).
         .controller('AdminCtrl', [function() {
 
     }])
-        .controller('RouteCtrl', ['getposition','$scope','latitudelongitude',function(getposition,$scope,latitudelongitude) {
-             $scope.positions=[];
-             $scope.getposition= function(){
-                    getposition.get()
-                    .then(function(value){
-                        return latitudelongitude.post(value);
-                    }) 
-                     .then(function(value){
-                        return latitudelongitude.get();
-                     })
-                     .then(function(value){
-                            $scope.positions = value.data.result;
-                     })
-                     .catch(function(reason){
-                        console.log(reason);
-                     });
-                 ;
-             };
-    }])
-
+       
         .controller('PrivateCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.useHttp = function() {
             $http.get('http://localhost:8002/helloworld')

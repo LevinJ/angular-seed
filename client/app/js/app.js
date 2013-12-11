@@ -9,7 +9,7 @@ angular.module('myApp', [
     'myApp.directives',
     'myApp.controllers'
 ]).
-        config(['$routeProvider', function($routeProvider) {
+        config(['$routeProvider', '$httpProvider',function($routeProvider,$httpProvider) {
         var access = routingConfig.accessLevels;
         $routeProvider.when('/register', {
             templateUrl: 'partials/register.html', 
@@ -42,7 +42,31 @@ angular.module('myApp', [
             controller: 'RouteCtrl',
             access:         access.user
         });
-        $routeProvider.otherwise({redirectTo: '/more'});
+        $routeProvider.otherwise({redirectTo: '/home'});
+        
+        var interceptor = ['$location', '$q', function($location, $q) {
+        function success(response) {
+            return response;
+        }
+
+        function error(response) {
+
+            if(response.status === 403) {
+                $location.path('/login');
+                return $q.reject(response);
+            }
+            else {
+                return $q.reject(response);
+            }
+        }
+
+        return function(promise) {
+            return promise.then(success, error);
+        }
+    }];
+
+    $httpProvider.responseInterceptors.push(interceptor);
+    
     }]);//.
      //   run(['$rootScope', '$location', 'Auth', function($rootScope, $location, Auth) {
 

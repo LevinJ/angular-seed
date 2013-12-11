@@ -7,9 +7,29 @@
 
 /* Controllers */
 angular.module('myApp.controllers')
+         .controller('RouteCtrl', ['getposition','$scope','latitudelongitude',function(getposition,$scope,latitudelongitude) {
+             $scope.positions=[];
+             $scope.getposition= function(){
+                    getposition.get()
+                    .then(function(value){
+                        return latitudelongitude.post(value);
+                    }) 
+                     .then(function(value){
+                        return latitudelongitude.get();
+                     })
+                     .then(function(value){
+                            $scope.positions = value.data.result;
+                     })
+                     .catch(function(reason){
+                        console.log(reason);
+                     });
+                 ;
+             };
+    }])
+
         .controller('HomeCtrl',
-        ['$rootScope', '$scope', '$location', '$route', '$routeParams', 'version', 'latitudelongitude',
-            function($rootScope, $scope, $location, $route, $routeParams, version, latitudelongitude) {
+        ['$rootScope', '$scope', '$location', '$route', '$routeParams', 'version', 'latitudelongitude','Users',
+            function($rootScope, $scope, $location, $route, $routeParams, version, latitudelongitude,Users) {
 
                 var BAIDUMAPM = (function() {
                     var map;
@@ -163,12 +183,19 @@ angular.module('myApp.controllers')
                                 console.warn(parseError(err));
                             });
                 }
+                $scope.getusers=function(){
+                    Users.getAll(function(data){
+                        console.log(data);
+                    },function(data){
+                        console.log(data);
+                    });
+                };
                 $(document).ready(function() {
                     initLayout();
 //    registerBtnHandle();
-                    BAIDUMAPM.showBase();
-                    LOGGINGUTIL.logInfo("Page loaded");
-                    refreshMarker();
+                  //  BAIDUMAPM.showBase();
+                   // LOGGINGUTIL.logInfo("Page loaded");
+                   // refreshMarker();
                 });
 
 
