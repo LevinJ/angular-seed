@@ -142,14 +142,14 @@ module.exports = function(app) {
         }
     });
 }
-
-function ensureAuthorized(req, res, next) {
-    var role;
-    if(!req.user) role = userRoles.public;
-    else          role = req.user.role;
-
-    var accessLevel = _.findWhere(routes, { path: req.route.path }).accessLevel || accessLevels.public;
-
-    if(!(accessLevel.bitMask & role.bitMask)) return res.send(403);
-    return next();
-}
+//
+//function ensureAuthorized(req, res, next) {
+//    var role;
+//    if(!req.user) role = userRoles.public;
+//    else          role = req.user.role;
+//
+//    var accessLevel = _.findWhere(routes, { path: req.route.path }).accessLevel || accessLevels.public;
+//
+//    if(!(accessLevel.bitMask & role.bitMask)) return res.send(403);
+//    return next();
+//}

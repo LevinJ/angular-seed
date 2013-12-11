@@ -8,11 +8,8 @@ var userRoles = require('../../client/app/js/routingConfig').userRoles;
 var accessLevels = require('../../client/app/js/routingConfig').accessLevels;
 var _ =  require('underscore')
 module.exports = {ensureAuthorized: ensureAuthorized};
-var routes = [{
-        path: '/users',
-        accessLevel: accessLevels.admin
-    },
-    {path: '/position', accessLevel: accessLevels.admin}];
+var routes = [{path: '/users', accessLevel: accessLevels.admin},
+    {path: '/position', accessLevel: accessLevels.user}];
 
 
 function ensureAuthorized(req, res, next) {
@@ -21,8 +18,12 @@ function ensureAuthorized(req, res, next) {
         role = userRoles.public;
     else
         role = req.user.role;
-
-    var accessLevel = _.findWhere(routes, {path: req.originalUrl}).accessLevel || accessLevels.public;
+    var route = _.findWhere(routes, {path: req.originalUrl});
+    if(!route){
+        //if this route is not restricted at all
+        return next();
+    }
+    var accessLevel = route.accessLevel;
 
     if (!(accessLevel.bitMask & role.bitMask))
         return res.send(403);
