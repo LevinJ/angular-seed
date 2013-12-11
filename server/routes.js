@@ -120,7 +120,7 @@ var routes = [
 module.exports = function(app) {
 
     _.each(routes, function(route) {
-        route.middleware.unshift(ensureAuthorized);
+//        route.middleware.unshift(ensureAuthorized);
         var args = _.flatten([route.path, route.middleware]);
 
         switch(route.httpMethod.toUpperCase()) {
