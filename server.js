@@ -33,6 +33,9 @@ passport.use(User.localStrategy);
 passport.serializeUser(User.serializeUser);
 passport.deserializeUser(User.deserializeUser);
 
+app.use(app.router);
+//add middleware
+app.use(require('./server/controllers/ensureAuthorized.js').ensureAuthorized);
 require('./server/routes.js')(app);
 require('./server/controllers/testcontroller.js')(app);
 require('./server/controllers/mapcontroller.js')(app);
