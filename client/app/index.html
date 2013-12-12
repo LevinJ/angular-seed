@@ -11,6 +11,8 @@
         <div class="navbar" data-ng-controller="NavCtrl">
             <div class="navbar-inner">
                 <div class="container-fluid">
+                    <span data-ng-click="checkinClick()" ng-controller="checkinCtrl">Check in</span>
+                    <span data-ng-click="toggleSidebarClick()">More</span>
                     <ul class="nav">
                         <li data-access-level="accessLevels.anon" active-nav>
                             <a href="#/login">Log in</a>
@@ -18,26 +20,14 @@
                         <li data-access-level="accessLevels.anon" active-nav>
                             <a href="#/register">Register</a>
                         </li>
-                        <li data-access-level="accessLevels.user" >
-                            <a data-ng-click="logout()" href="#">Log out</a>
-                        </li>
-                        <li  data-access-level="accessLevels.public" active-nav>
-                            <a  href="#/home">Home</a>
-                        </li>
-                        <li  data-access-level="accessLevels.user" active-nav>
-                            <a href="#/private">Private</a>
-                        </li>
-                       
-                        <li  data-access-level="accessLevels.user" active-nav>
-                            <a href="#/account">Accont</a>
-                        </li>
-                        <li data-access-level="accessLevels.admin" active-nav>
-                            <a href="#/admin">Admin</a>
+                        <li data-access-level="accessLevels.user" active-nav>
+                            <a ng-click="logout()" href="#">Log out</a>
                         </li>
                        
                     </ul>
+                    
                     <div class="pull-right" data-access-level="accessLevels.user" id="userInfo" >Welcome {{ user.username }} {{user.role.title}};
-                            <span data-ng-click="toggleSidebarClick()">More</span>
+                            
                     </div>
                 </div>
             </div>
@@ -71,6 +61,6 @@
          <script src="js/mapcontroller.js"></script>
         <script src="js/filters.js"></script>
         <script src="js/directives.js"></script>
-        <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=A7dfcf11e6de6b76103a36fdb226cf01"></script> 
+        <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=A7dfcf11e6de6b76103a36fdb226cf01"></script>--> 
     </body>
 </html>

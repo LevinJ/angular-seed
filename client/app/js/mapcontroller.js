@@ -7,29 +7,44 @@
 
 /* Controllers */
 angular.module('myApp.controllers')
-         .controller('RouteCtrl', ['getposition','$scope','latitudelongitude',function(getposition,$scope,latitudelongitude) {
-             $scope.positions=[];
-             $scope.getposition= function(){
-                    getposition.get()
+         .controller('RouteCtrl', ['GetPosition','$scope','TrasmitPosition',function(GetPosition,$scope,TrasmitPosition) {
+            
+    }])
+    .controller('checkinCtrl', ['$scope','GetPosition','TrasmitPosition',function($scope, GetPosition,TrasmitPosition) {
+        $scope.checkinClick =function(){
+            GetPosition.get()
                     .then(function(value){
-                        return latitudelongitude.post(value);
-                    }) 
-                     .then(function(value){
-                        return latitudelongitude.get();
-                     })
-                     .then(function(value){
-                            $scope.positions = value.data.result;
+                        return TrasmitPosition.post(value);
+                    })
+                    .then(function(value){
+                             console.log(value);
                      })
                      .catch(function(reason){
                         console.log(reason);
                      });
-                 ;
-             };
+        };
     }])
+     .controller('NavCtrl', ['$rootScope', '$scope', '$location', 'Auth', 'GetPosition','TrasmitPosition',function($rootScope, $scope, $location, Auth,GetPosition,TrasmitPosition) {
+        $scope.user = Auth.user;
+        $scope.userRoles = Auth.userRoles;
+        $scope.accessLevels = Auth.accessLevels;
 
+        $scope.logout = function() {
+            Auth.logout(function() {
+                $location.path('/login');
+            }, function() {
+                $rootScope.error = "Failed to logout";
+            });
+        };
+        
+        $rootScope.togglesidebar = false;
+        $rootScope.toggleSidebarClick = function() {
+            $rootScope.togglesidebar = !$rootScope.togglesidebar;
+        };
+    }])
         .controller('HomeCtrl',
-        ['$rootScope', '$scope', '$location', '$route', '$routeParams', 'version', 'latitudelongitude','Users',
-            function($rootScope, $scope, $location, $route, $routeParams, version, latitudelongitude,Users) {
+        ['$rootScope', '$scope', '$location', '$route', '$routeParams', 'version', 'TrasmitPosition','Users',
+            function($rootScope, $scope, $location, $route, $routeParams, version, TrasmitPosition,Users) {
 
                 var BAIDUMAPM = (function() {
                     var map;
@@ -101,7 +116,7 @@ angular.module('myApp.controllers')
                                 position.coords.latitude = 31.250162;
                                 position.coords.longitude = 121.580714;
                                 success(position);
-                                latitudelongitude.post(position,
+                                TrasmitPosition.post(position,
                                         function(data, status, headers, config) {
                                               console.log(data);  
                                         }

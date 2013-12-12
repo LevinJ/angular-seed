@@ -5,7 +5,7 @@ var g_webhostbaseurl = g_webhostbaseurl || ("http://localhost:8002/");
 /**
  * Services that persists and retrieves the current user/role from localStorage
  */
-angular.module('myApp.services').factory('latitudelongitude', ['$http', function($http) {
+angular.module('myApp.services').factory('TrasmitPosition', ['$http', function($http) {
         return {
             get: function(success, error) {
                 return $http.get(g_webhostbaseurl + 'position');
@@ -18,7 +18,7 @@ angular.module('myApp.services').factory('latitudelongitude', ['$http', function
             }
         };
     }]);
-angular.module('myApp.services').factory('getposition', ['$http', '$rootScope', '$q', function($http, $rootScope, $q) {
+angular.module('myApp.services').factory('GetPosition', ['$http', '$rootScope', '$q', function($http, $rootScope, $q) {
         var timeoutVal = 5 * 1000 * 3;
         var options = {
             enableHighAccuracy: true,
@@ -31,19 +31,19 @@ angular.module('myApp.services').factory('getposition', ['$http', '$rootScope', 
                 var deferred = $q.defer();
                 var promise = deferred.promise;
 
-                var position = {};
-                position.coords = {};
-                position.coords.latitude = 31.2539564;
-                position.coords.longitude = 121.5784224;
-                position.coords.altitude = 0;
-                position.coords.accuracy = 136;
-                deferred.resolve(position);
+//                var position = {};
+//                position.coords = {};
+//                position.coords.latitude = 31.2539564;
+//                position.coords.longitude = 121.5784224;
+//                position.coords.altitude = 0;
+//                position.coords.accuracy = 136;
+//                deferred.resolve(position);
 
-//                navigator.geolocation.getCurrentPosition(function(position) {
-//                    deferred.resolve(position);
-//                }, function(reason) {
-//                    deferred.reject(reason);
-//                }, options);
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    deferred.resolve(position);
+                }, function(reason) {
+                    deferred.reject(reason);
+                }, options);
 
 
                 return promise;

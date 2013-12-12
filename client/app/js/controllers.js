@@ -6,25 +6,7 @@ angular.module('myApp.controllers', ['ngAnimate']).
         controller('MyCtrl1', [function() {
 
     }])
-        .controller('NavCtrl', ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
-        $scope.user = Auth.user;
-        $scope.userRoles = Auth.userRoles;
-        $scope.accessLevels = Auth.accessLevels;
-
-        $scope.logout = function() {
-            Auth.logout(function() {
-                $location.path('/login');
-            }, function() {
-                $rootScope.error = "Failed to logout";
-            });
-        };
-
-        $rootScope.togglesidebar = false;
-
-        $rootScope.toggleSidebarClick = function() {
-            $rootScope.togglesidebar = !$rootScope.togglesidebar;
-        };
-    }])
+       
         .controller('ContentCtrl', ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
 //        $('#slider').height(function(index, height) {
 //            console.log(window.innerHeight);
