@@ -14,6 +14,8 @@ module.exports = function(app) {
     });
    
      app.post('/position', function(req, res) {
+         req.body.user = req.user.username;
+         req.body.submitDate = new Date();
          db.positions.insertPosition(req.body,function(err,result){
             res.send({err:err, 
                 result:result});

@@ -7,8 +7,16 @@
 
 /* Controllers */
 angular.module('myApp.controllers')
-         .controller('RouteCtrl', ['GetPosition','$scope','TrasmitPosition',function(GetPosition,$scope,TrasmitPosition) {
-            
+         .controller('RouteCtrl', ['$scope','TrasmitPosition',function($scope,TrasmitPosition) {
+                 $scope.positions=[];
+            TrasmitPosition.get()
+                    .then(function(value){
+                        $scope.positions=value.data.result;
+                             console.log(value);
+                     })
+                     .catch(function(reason){
+                        console.log(reason);
+                     });
     }])
     .controller('checkinCtrl', ['$scope','GetPosition','TrasmitPosition',function($scope, GetPosition,TrasmitPosition) {
         $scope.checkinClick =function(){
