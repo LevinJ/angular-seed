@@ -9,8 +9,10 @@ var db = mongoskin.db('localhost:27017/geotrackerdb?auto_reconnect=true', {safe:
 
 module.exports=db;
 db.bind('positions', {
-    qeuryPositions: function(cb) {
-        this.find().toArray(function(err, result) {
+    qeuryPositions: function(queryParams, cb) {
+        var query = {user:queryParams.username,
+            submitDate:{$gte: queryParams.starttime, $lt: queryParams.endtime}};
+        this.find(query).toArray(function(err, result) {
             cb(err, result);
             console.dir(err);
             console.dir(result);
@@ -25,7 +27,11 @@ db.bind('positions', {
     }
 }
 );
-
+//var queryParams = {};
+//queryParams.username = "user";
+//queryParams.starttime = new Date(2010, 3, 1);
+//queryParams.endtime = new Date(2015, 4, 1);
+//db.positions.qeuryPositions(queryParams,function(){});
 //db.positions.insertPosition({vow:"hello"},function(){});
 //db.positions.insertPosition({vow2:"hello2"},function(){});
 //

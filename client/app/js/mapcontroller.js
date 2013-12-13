@@ -8,8 +8,12 @@
 /* Controllers */
 angular.module('myApp.controllers')
          .controller('RouteCtrl', ['$scope','TrasmitPosition',function($scope,TrasmitPosition) {
+                 var queryParams={};
+                 queryParams.username = 'user';
+                 queryParams.starttime = new Date(2010, 3, 1);
+                 queryParams.endtime = new Date(2015, 4, 1);
                  $scope.positions=[];
-            TrasmitPosition.get()
+            TrasmitPosition.get(queryParams)
                     .then(function(value){
                         $scope.positions=value.data.result;
                              console.log(value);

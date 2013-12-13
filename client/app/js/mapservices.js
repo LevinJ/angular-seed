@@ -7,9 +7,9 @@ var g_webhostbaseurl = g_webhostbaseurl || ("http://localhost:8002/");
  */
 angular.module('myApp.services').factory('TrasmitPosition', ['$http', function($http) {
         return {
-            get: function(success, error) {
-                return $http.get(g_webhostbaseurl + 'position');
-//                $http.get(g_webhostbaseurl + 'position').success(success).error(error);
+            get: function(queryParams) {
+                return $http.get((g_webhostbaseurl + 'position'),
+                {params: queryParams});
             },
             post: function(position, success, error) {
                 var url = g_webhostbaseurl + 'position';
