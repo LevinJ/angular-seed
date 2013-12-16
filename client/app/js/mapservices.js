@@ -11,7 +11,7 @@ angular.module('myApp.services').factory('TrasmitPosition', ['$http', function($
                 return $http.get((g_webhostbaseurl + 'position'),
                 {params: queryParams});
             },
-            post: function(position, success, error) {
+            post: function(position) {
                 var url = g_webhostbaseurl + 'position';
 //                $http.post(url, position).success(success).error(error);
                 return $http.post(url, position);
@@ -24,7 +24,7 @@ angular.module('myApp.services').factory('TrasmitTrackingList', ['$http', functi
                 return $http.get((g_webhostbaseurl + 'trackinglist'),
                 {params: queryParams});
             },
-            post: function(postData, success, error) {
+            post: function(postData) {
                 var url = g_webhostbaseurl + 'trackinglist';
                 return $http.post(url, postData);
             }

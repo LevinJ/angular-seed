@@ -7,51 +7,68 @@
 
 /* Controllers */
 angular.module('myApp.controllers')
-         .controller('RouteCtrl', ['$scope','TrasmitPosition',function($scope,TrasmitPosition) {
-                 var queryParams={};
-                 queryParams.username = 'user';
-                 queryParams.starttime = new Date(2010, 3, 1);
-                 queryParams.endtime = new Date(2015, 4, 1);
-                 $scope.positions=[];
-            TrasmitPosition.get(queryParams)
-                    .then(function(value){
-                        $scope.positions=value.data.result;
-                             console.log(value);
-                     })
-                     .catch(function(reason){
-                        console.log(reason);
-                     });
+        .controller('RouteCtrl', ['$scope', 'TrasmitPosition', function($scope, TrasmitPosition) {
+        var queryParams = {};
+        queryParams.username = 'user';
+        queryParams.starttime = new Date(2010, 3, 1);
+        queryParams.endtime = new Date(2015, 4, 1);
+        $scope.positions = [];
+        TrasmitPosition.get(queryParams)
+                .then(function(value) {
+            $scope.positions = value.data.result;
+            console.log(value);
+        })
+                . catch (function(reason) {
+            console.log(reason);
+        });
     }])
-    .controller('TrackinglistCtrl', ['$scope', 'TrasmitTrackingList',function($scope,TrasmitTrackingList) {
-            TrasmitTrackingList.get()
-                    .then(function(value){
-                        $scope.users=value.data.result;
-                             console.log(value);
-                     })
-              $scope.users=[];
-      $scope.addNewUser = function(newUser){
-           $scope.users.push(newUser);
-           $scope.newUser = '';
-      };
-       $scope.deleteUser = function(user){
-           $scope.users.splice($scope.users.indexOf(user),1);
-      };
-    }])
-    .controller('checkinCtrl', ['$scope','GetPosition','TrasmitPosition',function($scope, GetPosition,TrasmitPosition) {
-        $scope.checkinClick =function(){
-            GetPosition.get()
-                    .then(function(value){
-                        return TrasmitPosition.post(value);
-                    })
-                    .then(function(value){
-                             console.log(value);
-                     })
-                     .catch(function(reason){
-                        console.log(reason);
+        .controller('TrackinglistCtrl', ['$scope', 'TrasmitTrackingList', 'Auth', function($scope, TrasmitTrackingList,Auth) {
+        var queryParams = {};
+        queryParams.user = Auth.user.username;
+        TrasmitTrackingList.get(queryParams)
+                .then(function(value) {
+                     $scope.trackingdata = value.data.result;
+                     console.log(value);
+                  })
+                  . catch (function(reason) {
+                       console.log(reason);
                      });
+        $scope.addNewUser = function(newUser) {
+            
+            $scope.trackingdata.trackinglist.push(newUser);
+            
+            TrasmitTrackingList.post($scope.trackingdata)
+            .then(function(value) {
+                     $scope.trackingdata = value.data.result;
+                     $scope.newUser = '';
+                     console.log(value);
+                  })
+                  . catch (function(reason) {
+                       console.log(reason);
+                        var arr = $scope.trackingdata.trackinglist.
+                                arr.splice(arr.indexOf(newUser), 1);
+                     });
+            
+        };
+        $scope.deleteUser = function(user) {
+            $scope.users.splice($scope.users.indexOf(user), 1);
         };
     }])
-     .controller('NavCtrl', ['$rootScope', '$scope', '$location', 'Auth', 'GetPosition','TrasmitPosition',function($rootScope, $scope, $location, Auth,GetPosition,TrasmitPosition) {
+        .controller('checkinCtrl', ['$scope', 'GetPosition', 'TrasmitPosition', function($scope, GetPosition, TrasmitPosition) {
+        $scope.checkinClick = function() {
+            GetPosition.get()
+                    .then(function(value) {
+                return TrasmitPosition.post(value);
+            })
+                    .then(function(value) {
+                console.log(value);
+            })
+                    . catch (function(reason) {
+                console.log(reason);
+            });
+        };
+    }])
+        .controller('NavCtrl', ['$rootScope', '$scope', '$location', 'Auth', 'GetPosition', 'TrasmitPosition', function($rootScope, $scope, $location, Auth, GetPosition, TrasmitPosition) {
         $scope.user = Auth.user;
         $scope.userRoles = Auth.userRoles;
         $scope.accessLevels = Auth.accessLevels;
@@ -63,15 +80,15 @@ angular.module('myApp.controllers')
                 $rootScope.error = "Failed to logout";
             });
         };
-        
+
         $rootScope.togglesidebar = false;
         $rootScope.toggleSidebarClick = function() {
             $rootScope.togglesidebar = !$rootScope.togglesidebar;
         };
     }])
         .controller('HomeCtrl',
-        ['$rootScope', '$scope', '$location', '$route', '$routeParams', 'version', 'TrasmitPosition','Users',
-            function($rootScope, $scope, $location, $route, $routeParams, version, TrasmitPosition,Users) {
+        ['$rootScope', '$scope', '$location', '$route', '$routeParams', 'version', 'TrasmitPosition', 'Users',
+            function($rootScope, $scope, $location, $route, $routeParams, version, TrasmitPosition, Users) {
 
                 var BAIDUMAPM = (function() {
                     var map;
@@ -145,10 +162,10 @@ angular.module('myApp.controllers')
                                 success(position);
                                 TrasmitPosition.post(position,
                                         function(data, status, headers, config) {
-                                              console.log(data);  
+                                            console.log(data);
                                         }
                                 , function(data, status, headers, config) {
-                                                console.log(data);
+                                    console.log(data);
                                 });
                             }());
                             //navigator.geolocation.getCurrentPosition(success, error, options);
@@ -225,19 +242,19 @@ angular.module('myApp.controllers')
                                 console.warn(parseError(err));
                             });
                 }
-                $scope.getusers=function(){
-                    Users.getAll(function(data){
+                $scope.getusers = function() {
+                    Users.getAll(function(data) {
                         console.log(data);
-                    },function(data){
+                    }, function(data) {
                         console.log(data);
                     });
                 };
                 $(document).ready(function() {
                     initLayout();
 //    registerBtnHandle();
-                  //  BAIDUMAPM.showBase();
-                   // LOGGINGUTIL.logInfo("Page loaded");
-                   // refreshMarker();
+                    //  BAIDUMAPM.showBase();
+                    // LOGGINGUTIL.logInfo("Page loaded");
+                    // refreshMarker();
                 });
 
 

@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 var db = require('../models/positionmodel.js');
+var trackinglistCollection = require('../models/trackinglistmodel.js');
 module.exports = function(app) {
 
     app.get('/position', function(req, res) {
@@ -28,6 +29,21 @@ module.exports = function(app) {
     });
     app.put('/position', function(req, res) {
         res.send({helloword: "put hello world from nodejs"});
+    });
+    
+    app.get('/trackinglist', function(req, res) {
+        trackinglistCollection.qeuryTrackingList(req.query,function(err, result) {
+            res.send({err: err,
+                result: result});
+        });
+
+    });
+
+    app.post('/trackinglist', function(req, res) {
+        trackinglistCollection.insertTrackinglist(req.body, function(err, result) {
+            res.send({err: err,
+                result: result});
+        });
     });
 
 };

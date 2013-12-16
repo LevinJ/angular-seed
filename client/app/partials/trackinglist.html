@@ -5,7 +5,7 @@ placeholder="add new tracking user here">
 </form>
 <p>Current tracking users:</p>
 <ul class="unstyled">
-<li ng-repeat="user in users">
+<li ng-repeat="user in trackingdata.trackinglist">
     <span>{{user}}</span>
 <input type="button"  ng-click="deleteUser(user)"value="Delete">
 </li>
