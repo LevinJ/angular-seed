@@ -22,6 +22,21 @@ angular.module('myApp.controllers')
                         console.log(reason);
                      });
     }])
+    .controller('TrackinglistCtrl', ['$scope', 'TrasmitTrackingList',function($scope,TrasmitTrackingList) {
+            TrasmitTrackingList.get()
+                    .then(function(value){
+                        $scope.users=value.data.result;
+                             console.log(value);
+                     })
+              $scope.users=[];
+      $scope.addNewUser = function(newUser){
+           $scope.users.push(newUser);
+           $scope.newUser = '';
+      };
+       $scope.deleteUser = function(user){
+           $scope.users.splice($scope.users.indexOf(user),1);
+      };
+    }])
     .controller('checkinCtrl', ['$scope','GetPosition','TrasmitPosition',function($scope, GetPosition,TrasmitPosition) {
         $scope.checkinClick =function(){
             GetPosition.get()

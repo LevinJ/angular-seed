@@ -42,6 +42,11 @@ angular.module('myApp', [
             controller: 'RouteCtrl',
             access:         access.user
         });
+         $routeProvider.when('/trackinglist', {
+            templateUrl: 'partials/trackinglist.html', 
+            controller: 'TrackinglistCtrl',
+            access:         access.user
+        });
         $routeProvider.otherwise({redirectTo: '/home'});
         
         var interceptor = ['$location', '$q', function($location, $q) {

@@ -18,6 +18,18 @@ angular.module('myApp.services').factory('TrasmitPosition', ['$http', function($
             }
         };
     }]);
+angular.module('myApp.services').factory('TrasmitTrackingList', ['$http', function($http) {
+        return {
+            get: function(queryParams) {
+                return $http.get((g_webhostbaseurl + 'trackinglist'),
+                {params: queryParams});
+            },
+            post: function(postData, success, error) {
+                var url = g_webhostbaseurl + 'trackinglist';
+                return $http.post(url, postData);
+            }
+        };
+    }]);
 angular.module('myApp.services').factory('GetPosition', ['$http', '$rootScope', '$q', function($http, $rootScope, $q) {
         var timeoutVal = 5 * 1000;
         var options = {
