@@ -7,6 +7,7 @@ var trackinglistCollection = require('../models/trackinglistmodel.js');
 module.exports = function(app) {
 
     app.get('/position', function(req, res) {
+        console.log(req.originalUrl);
         req.query.starttime = new Date(JSON.parse(req.query.starttime));
         req.query.endtime = new Date(JSON.parse(req.query.endtime));
         db.positions.qeuryPositions(req.query,function(err, result) {

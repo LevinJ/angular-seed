@@ -23,6 +23,7 @@
     "karma-jasmine": "~0.1",
     "karma-ng-scenario": "~0.1",
     "should": "~2.1.1",
-    "supertest": "~0.8.2"
+    "supertest": "~0.8.2",
+    "mocha": "*"
   }
 }
