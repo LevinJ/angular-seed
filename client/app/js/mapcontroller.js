@@ -18,7 +18,7 @@ angular.module('myApp.controllers')
             $scope.positions = value.data.result;
             console.log(value);
         })
-                . catch (function(reason) {
+        . catch (function(reason) {
             console.log(reason);
         });
     }])
@@ -28,6 +28,11 @@ angular.module('myApp.controllers')
         TrasmitTrackingList.get(queryParams)
                 .then(function(value) {
                      $scope.trackingdata = value.data.result;
+                     if(!$scope.trackingdata){
+                         $scope.trackingdata = {};
+                         $scope.trackingdata.user = Auth.user.username;
+                         $scope.trackingdata.trackinglist=[];
+                     }
                      console.log(value);
                   })
                   . catch (function(reason) {
@@ -37,21 +42,35 @@ angular.module('myApp.controllers')
             
             $scope.trackingdata.trackinglist.push(newUser);
             
-            TrasmitTrackingList.post($scope.trackingdata)
-            .then(function(value) {
-                     $scope.trackingdata = value.data.result;
-                     $scope.newUser = '';
-                     console.log(value);
-                  })
-                  . catch (function(reason) {
-                       console.log(reason);
-                        var arr = $scope.trackingdata.trackinglist.
-                                arr.splice(arr.indexOf(newUser), 1);
-                     });
+            TrasmitTrackingList.post($scope.trackingdata);
+//            .then(function(value) {
+//                     $scope.trackingdata = value.data.result;
+//                     $scope.newUser = '';
+//                     console.log(value);
+//                  })
+//                  . catch (function(reason) {
+//                       console.log(reason);
+//                        var arr = $scope.trackingdata.trackinglist;
+//                                arr.splice(arr.indexOf(newUser), 1);
+//                     });
             
         };
         $scope.deleteUser = function(user) {
-            $scope.users.splice($scope.users.indexOf(user), 1);
+             var arr = $scope.trackingdata.trackinglist;
+             arr.splice(arr.indexOf(user
+                     ), 1);
+              TrasmitTrackingList.post($scope.trackingdata);
+              //will add middleware to handle errors
+//            .then(function(value) {
+//                     $scope.trackingdata = value.data.result;
+//                     $scope.newUser = '';
+//                     console.log(value);
+//                  })
+//                  . catch (function(reason) {
+//                       console.log(reason);
+//                        var arr = $scope.trackingdata.trackinglist;
+//                                arr.splice(arr.indexOf(newUser), 1);
+//                     });
         };
     }])
         .controller('checkinCtrl', ['$scope', 'GetPosition', 'TrasmitPosition', function($scope, GetPosition, TrasmitPosition) {
