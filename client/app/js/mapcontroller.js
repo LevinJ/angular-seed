@@ -43,6 +43,11 @@ angular.module('myApp.controllers')
                 $scope.update($scope.currentusertracked);
 
             }])
+        .controller('ErrorPageCtrl', ['$rootScope',function($rootScope) {
+
+//              $rootScope.
+
+            }])
         .controller('TrackinglistCtrl', ['$scope', 'TrasmitTrackingList', 'Auth', function($scope, TrasmitTrackingList, Auth) {
                 var queryParams = {};
                 queryParams.user = Auth.user.username;
