@@ -41,6 +41,7 @@ angular.module('myApp.controllers')
         $scope.addNewUser = function(newUser) {
             
             $scope.trackingdata.trackinglist.push(newUser);
+            $scope.newUser = '';
             
             TrasmitTrackingList.post($scope.trackingdata);
 //            .then(function(value) {

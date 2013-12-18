@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Levin/Misec/geotracker/source/angular-seed/client/app/partials/trackinglist.html</file>
-            <file>file:/C:/Levin/Misec/geotracker/source/angular-seed/client/app/js/mapservices.js</file>
-            <file>file:/C:/Levin/Misec/geotracker/source/angular-seed/client/app/js/mapcontroller.js</file>
+            <file>file:/C:/Levin/Misec/geotracker/source/angular-seed/server.js</file>
+            <file>file:/C:/Levin/Misec/geotracker/source/angular-seed/package.json</file>
+            <file>file:/C:/Levin/Misec/geotracker/source/angular-seed/server/controllers/mapcontroller.js</file>
+            <file>file:/C:/Levin/Misec/geotracker/source/angular-seed/server/models/trackinglistmodel.js</file>
         </group>
     </open-files>
 </project-private>
