@@ -89,7 +89,7 @@ db.bind('userCollection', {
 		});  
 	},
         deleteUser:function(username, fn){
-		this.findOne({username: username}, function (err, doc) {
+		this.remove({username: username}, function (err, doc) {
 				fn(err,doc);
 		});  
 	}

@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 
-var mongoskin = require('mongoskin');
-var db = mongoskin.db('localhost:27017/geotrackerdb?auto_reconnect=true', {safe: true});
+var config = require('../config.js');
+var db = config.db;
 
 module.exports=db;
 db.bind('positions', {
