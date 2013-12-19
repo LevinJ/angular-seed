@@ -38,7 +38,8 @@ app.use(require('./server/controllers/ensureAuthorized.js').ensureAuthorized);
 //add router middleware
 app.use(app.router);
 
-require('./server/routes.js')(app);
+//require('./server/routes.js')(app);
+require('./server/controllers/usercontroller.js')(app);
 require('./server/controllers/testcontroller.js')(app);
 require('./server/controllers/mapcontroller.js')(app);
 
