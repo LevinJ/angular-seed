@@ -6,9 +6,47 @@
 
 var userRoles = require('../../client/app/js/routingConfig').userRoles;
 var accessLevels = require('../../client/app/js/routingConfig').accessLevels;
+var userCollection = require('../models/usermodel.js');
 var _ = require('underscore');
 var url = require("url");
-module.exports = {ensureAuthorized: ensureAuthorized};
+module.exports = {ensureAuthorized: ensureAuthorized,
+    localStrategy: new LocalStrategy(
+        function(username, password, done) {
+            userCollection.login({username:'username', password:'password'}, function(err, docs) {
+
+            done();
+        });
+            var user = module.exports.findByUsername(username);
+
+            if(!user) {
+                done(null, false, { message: 'Incorrect username.' });
+            }
+            else if(user.password != password) {
+                done(null, false, { message: 'Incorrect username.' });
+            }
+            else {
+                return done(null, user);
+            }
+
+        }
+    ),
+    serializeUser: function(user, done) {
+        done(null, user.username);
+        
+    },
+
+    deserializeUser: function(id, done) {
+        userCollection.getUser(id, function(err, result) {
+            if(result){
+                done(null, user);
+            }else{
+                done(null, false);
+            }
+        });
+    }};
+
+
+
 var routes = [{path: '/users', accessLevel: accessLevels.admin},
     {path: '/position', accessLevel: accessLevels.user},
     {path: '/trackinglist', accessLevel: accessLevels.user}];

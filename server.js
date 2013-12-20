@@ -5,6 +5,7 @@ var express =       require('express')
     , User =        require('./server/models/User.js');
 
 var app = module.exports = express();
+var ensureAuthorized = require('./server/controllers/ensureAuthorized.js');
 
 //app.set('views', __dirname + '/client/app');
 //app.set('view engine', 'jade');
@@ -30,11 +31,11 @@ passport.use(User.localStrategy);
 //passport.use(User.googleStrategy());   // Comment out this line if you don't want to enable login via Google
 //passport.use(User.linkedInStrategy()); // Comment out this line if you don't want to enable login via LinkedIn
 
-passport.serializeUser(User.serializeUser);
-passport.deserializeUser(User.deserializeUser);
+passport.serializeUser(ensureAuthorized.serializeUser);
+passport.deserializeUser(ensureAuthorized.deserializeUser);
 
-//add middleware
-app.use(require('./server/controllers/ensureAuthorized.js').ensureAuthorized);
+//add middlewa
+app.use(ensureAuthorized.ensureAuthorized);
 //add router middleware
 app.use(app.router);
 

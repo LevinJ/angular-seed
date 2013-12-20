@@ -12,19 +12,45 @@ var userCollection = require('../models/usermodel.js');
 
 
 describe('usermodels', function() {
-    it('remove the user if it exists', function(done) {
-        userCollection.deleteUser('tom', function(err, result) {
-            should.not.exist(err);
-            should.exist(result);
-            done();
-        });
-    });
+     before(function(done) {
+            userCollection.deleteUser('tom', function(err, result) {
+                should.not.exist(err);
+                should.exist(result);
+                done();
+            });
+        }
+    );
+    after(function(done) {
+            userCollection.deleteUser('tom', function(err, result) {
+                should.not.exist(err);
+                should.exist(result);
+                done();
+            });
+        }
+    );
     it('register one user', function(done) {
         userCollection.register({username: 'tom', password: '123456', email: 'tom@sina.com'}, function(err, docs) {
             should.not.exist(err);
             should.exist(docs);
             docs[0].username.should.equal('tom');
             docs[0].email.should.equal('tom@sina.com');
+            done();
+        });
+    });
+    it('should get a user that exist', function(done) {
+        userCollection.getUser('tom', function(err, docs) {
+            should.not.exist(err);
+            should.exist(docs);
+            docs.username.should.equal('tom');
+            docs.email.should.equal('tom@sina.com');
+            docs.password.should.equal('123456');
+            done();
+        });
+    });
+    it('should return nothing if a user does not exist', function(done) {
+        userCollection.getUser('tom2', function(err, docs) {
+            should.not.exist(err);
+            should.not.exist(docs);
             done();
         });
     });
@@ -57,14 +83,7 @@ describe('usermodels', function() {
             done();
         });
     });
-    it('remove one user', function(done) {
-        userCollection.deleteUser('tom', function(err, result) {
-            should.not.exist(err);
-            should.exist(result);
-            result.should.equal(1);
-            done();
-        });
-    });
+    
 });
 
 describe('controllers', function() {

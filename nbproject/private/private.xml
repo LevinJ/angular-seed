@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Levin/Misec/geotracker/source/angular-seed/server/config.js</file>
-            <file>file:/C:/Levin/Misec/geotracker/source/angular-seed/server/test/trackinglist.js</file>
-            <file>file:/C:/Levin/Misec/geotracker/source/angular-seed/server/models/usermodel.js</file>
-            <file>file:/C:/Levin/Misec/geotracker/source/angular-seed/server/test/user.js</file>
-            <file>file:/C:/Levin/Misec/geotracker/source/angular-seed/server/test/position.js</file>
-            <file>file:/C:/Levin/Misec/geotracker/source/angular-seed/server/models/trackinglistmodel.js</file>
+            <file>file:/C:/Levin/Misec/geotracker/source/angular-seed/server.js</file>
+            <file>file:/C:/Levin/Misec/geotracker/source/angular-seed/server/models/User.js</file>
+            <file>file:/C:/Levin/Misec/geotracker/source/angular-seed/server/controllers/ensureAuthorized.js</file>
         </group>
     </open-files>
 </project-private>
