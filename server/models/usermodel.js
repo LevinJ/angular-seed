@@ -92,6 +92,11 @@ db.bind('userCollection', {
 		this.remove({username: username}, function (err, doc) {
 				fn(err,doc);
 		});  
+	},
+        removeUsers:function(fn){
+		this.remove({}, function (err, doc) {
+				fn(err,doc);
+		});  
 	}
 });
 

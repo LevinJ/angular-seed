@@ -4,13 +4,18 @@
  * and open the template in the editor.
  */
 var mongoskin = require('mongoskin');
-//var dbConnection = mongoskin.db('localhost:27017/geotrackerdb?auto_reconnect=true', {safe: true});
-var dbConnection = mongoskin.db('localhost:27017/geotrackerdb_test?auto_reconnect=true', {safe: true});
+var dbConnection = mongoskin.db('localhost:27017/geotrackerdb?auto_reconnect=true', {safe: true});
+
 module.exports = {
 db:  dbConnection,
 testhost:'http://localhost:8002',
 logger: {
 "api": "logs/api.log",
 "exception": "logs/exceptions.log"
-}
+},
+unittestenv:true
 };
+
+if(module.exports.unittestenv){
+   dbConnection = mongoskin.db('localhost:27017/geotrackerdb_test?auto_reconnect=true', {safe: true});
+}

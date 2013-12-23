@@ -32,10 +32,11 @@ module.exports = function(app) {
         });
     }); 
     app.post('/login', function(req, res,next) {
-          passport.authenticate('local', function(err, user) {
+          passport.authenticate('local', function(err, user,message) {
 
             if(err)     { return next(err); }
-            if(!user)   { return res.send(400, err); }
+            if(!user)   { 
+                return res.send(400, message.message); }
 
 
             req.logIn(user, function(err) {

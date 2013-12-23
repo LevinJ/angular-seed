@@ -12,18 +12,16 @@ var userCollection = require('../models/usermodel.js');
 
 
 describe('usermodels', function() {
-     before(function(done) {
-            userCollection.deleteUser('tom', function(err, result) {
+    before(function(done) {
+            userCollection.removeUsers(function(err, result) {
                 should.not.exist(err);
-                should.exist(result);
                 done();
             });
         }
     );
     after(function(done) {
-            userCollection.deleteUser('tom', function(err, result) {
+            userCollection.removeUsers(function(err, result) {
                 should.not.exist(err);
-                should.exist(result);
                 done();
             });
         }
@@ -89,17 +87,15 @@ describe('usermodels', function() {
 describe('controllers', function() {
 
     before(function(done) {
-            userCollection.deleteUser('jack', function(err, result) {
+            userCollection.removeUsers(function(err, result) {
                 should.not.exist(err);
-                should.exist(result);
                 done();
             });
         }
     );
     after(function(done) {
-            userCollection.deleteUser('jack', function(err, result) {
+            userCollection.removeUsers(function(err, result) {
                 should.not.exist(err);
-                should.exist(result);
                 done();
             });
         }
@@ -143,6 +139,51 @@ describe('controllers', function() {
                 .end(function(err, result) {
             should.not.exist(err);
             result.text.should.equal('邮箱已被使用');
+            done();
+        });
+    });
+    
+     it('should login with the right username and password', function(done) {
+        postData = {username: 'jack',
+            password: "123456"};
+        request
+                .post('/login')
+                .send(postData)
+                .expect(200)
+                .end(function(err, res) {
+            should.not.exist(err);
+            should.exist(res);
+            res.body.username.should.equal('jack');
+            done();
+        });
+    });
+    
+    it('should fail to login with the wrong username', function(done) {
+        postData = {username: 'jack2not',
+            password: "123456"};
+        request
+                .post('/login')
+                .send(postData)
+                .expect(400)
+                .end(function(err, result) {
+            should.not.exist(err);
+            should.exist(result);
+            result.text.should.equal('该用户名不存在');
+            done();
+        });
+    });
+    
+    it('should fail to login with the wrong password', function(done) {
+        postData = {username: 'jack',
+            password: "1234567"};
+        request
+                .post('/login')
+                .send(postData)
+                .expect(400)
+                .end(function(err, result) {
+            should.not.exist(err);
+            should.exist(result);
+            result.text.should.equal('密码错误');
             done();
         });
     });

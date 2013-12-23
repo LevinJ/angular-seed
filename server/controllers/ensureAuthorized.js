@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+var config = require('../config.js');
 var userRoles = require('../../client/app/js/routingConfig').userRoles;
 var accessLevels = require('../../client/app/js/routingConfig').accessLevels;
 var userCollection = require('../models/usermodel.js');
@@ -19,19 +19,6 @@ module.exports = {ensureAuthorized: ensureAuthorized,
                 }
                 return done(null, user);        
         });
-//            var user = module.exports.findByUsername(username);
-//
-//            if(!user) {
-//                done(null, false, { message: 'Incorrect username.' });
-//            }
-//            else if(user.password != password) {
-//                done(null, false, { message: 'Incorrect username.' });
-//            }
-//            
-//            else {
-//                return done(null, user);
-//            }
-
         }
     ),
     serializeUser: function(user, done) {
@@ -55,6 +42,9 @@ var routes = [{path: '/users', accessLevel: accessLevels.admin},
     {path: '/position', accessLevel: accessLevels.user},
     {path: '/trackinglist', accessLevel: accessLevels.user}];
 
+if(config.unittestenv){
+   routes = [];
+}
 
 function ensureAuthorized(req, res, next) {
     var role;

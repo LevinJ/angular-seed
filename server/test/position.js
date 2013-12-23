@@ -14,12 +14,12 @@ describe('controllers', function() {
     it('get all positions', function(done) {
         request
                 .get('/position?endtime="2015-04-30T16:00:00.000Z"&starttime="2010-03-31T16:00:00.000Z"&username=user')
-                .expect(403)
+                .expect(200)
                 .end(function(err, res) {
             should.not.exist(err);
             should.exist(res);
-//            console.dir(err);
-//            console.dir(res.body);
+            console.dir(err);
+            console.dir(res.body);
 //            res.body.result.length.should.equal(9);
             done();
         });
