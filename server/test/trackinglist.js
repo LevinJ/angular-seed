@@ -27,7 +27,7 @@ describe('controllers', function() {
     it('should get the tracking list for user', function(done) {
         request
                 .get('/trackinglist?user=user')
-                .expect(403)
+                .expect(200)
                 .end(function(err, res) {
             should.not.exist(err);
             should.exist(res);
@@ -43,7 +43,7 @@ describe('controllers', function() {
         request
                 .post('/trackinglist')
                 .send(postData)
-                .expect(403)
+                .expect(200)
                 .end(function(err, res) {
             should.not.exist(err);
             should.exist(res);

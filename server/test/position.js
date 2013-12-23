@@ -18,9 +18,9 @@ describe('controllers', function() {
                 .end(function(err, res) {
             should.not.exist(err);
             should.exist(res);
-            console.dir(err);
-            console.dir(res.body);
-//            res.body.result.length.should.equal(9);
+//            console.dir(err);
+//            console.dir(res.body);
+////            res.body.result.length.should.equal(9);
             done();
         });
     });
