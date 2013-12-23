@@ -59,6 +59,7 @@ angular.module('myApp.controllers', ['ngAnimate']).
                     Auth.register({
                         username: $scope.username,
                         password: $scope.password,
+                        email:$scope.email,
                         role: $scope.role
                     },
                     function() {

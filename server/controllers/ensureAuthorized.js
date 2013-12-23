@@ -7,26 +7,30 @@
 var userRoles = require('../../client/app/js/routingConfig').userRoles;
 var accessLevels = require('../../client/app/js/routingConfig').accessLevels;
 var userCollection = require('../models/usermodel.js');
+var LocalStrategy =   require('passport-local').Strategy;
 var _ = require('underscore');
 var url = require("url");
 module.exports = {ensureAuthorized: ensureAuthorized,
     localStrategy: new LocalStrategy(
         function(username, password, done) {
-            userCollection.login({username:'username', password:'password'}, function(err, docs) {
-
-            done();
+            userCollection.login({username:username, password:password}, function(err, user) {
+                if(err){
+                    return done(null, false, { message: err });
+                }
+                return done(null, user);        
         });
-            var user = module.exports.findByUsername(username);
-
-            if(!user) {
-                done(null, false, { message: 'Incorrect username.' });
-            }
-            else if(user.password != password) {
-                done(null, false, { message: 'Incorrect username.' });
-            }
-            else {
-                return done(null, user);
-            }
+//            var user = module.exports.findByUsername(username);
+//
+//            if(!user) {
+//                done(null, false, { message: 'Incorrect username.' });
+//            }
+//            else if(user.password != password) {
+//                done(null, false, { message: 'Incorrect username.' });
+//            }
+//            
+//            else {
+//                return done(null, user);
+//            }
 
         }
     ),
@@ -38,7 +42,7 @@ module.exports = {ensureAuthorized: ensureAuthorized,
     deserializeUser: function(id, done) {
         userCollection.getUser(id, function(err, result) {
             if(result){
-                done(null, user);
+                done(null, result);
             }else{
                 done(null, false);
             }

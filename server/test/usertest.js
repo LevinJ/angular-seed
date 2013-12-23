@@ -115,8 +115,7 @@ describe('controllers', function() {
                 .end(function(err, res) {
             should.not.exist(err);
             should.exist(res);
-//            console.dir(res.body);
-            res.body.result[0].username.should.equal('jack');
+            res.body.username.should.equal('jack');
             done();
         });
     });
@@ -127,10 +126,23 @@ describe('controllers', function() {
         request
                 .post('/register')
                 .send(postData)
-                .expect(200)
+                .expect(400)
                 .end(function(err, result) {
             should.not.exist(err);
-            should.exist(result.body.err);
+            result.text.should.equal('用户名已被使用');
+            done();
+        });
+    });
+    it('should fail to register a user with  deuplicate email', function(done) {
+        postData = {username: 'jack2',
+            password: "123456", email: 'jian@gmail.com'};
+        request
+                .post('/register')
+                .send(postData)
+                .expect(400)
+                .end(function(err, result) {
+            should.not.exist(err);
+            result.text.should.equal('邮箱已被使用');
             done();
         });
     });
