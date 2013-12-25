@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="css/bootstrap.css">
     </head>
     <body>
-        <div class="navbar" data-ng-controller="NavCtrl">
+<!--        <div class="navbar" data-ng-controller="NavCtrl">
             <div class="navbar-inner">
                 <div class="container-fluid">
                     <span data-ng-click="checkinClick()" ng-controller="checkinCtrl">Check in</span>
@@ -31,13 +31,27 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
+         <div data-ng-controller="NavCtrl">
+             
+                    
+                    <span data-access-level="accessLevels.anon" active-nav>
+                            <a href="#/login">Log in</a>
+                        </span>
+                        <span data-access-level="accessLevels.anon" active-nav>
+                            <a href="#/register">Register</a>
+                        </span>
+             <button data-ng-click="toggleSidebarClick()"  data-access-level="accessLevels.user">More</button>
+             <button data-ng-click="checkinClick()" ng-controller="checkinCtrl" data-access-level="accessLevels.user">Check in</button>
+            
+            </div>
          <div id="container" ng-controller="ContentCtrl">
             <div id="slider" ng-show="togglesidebar">
                 <a href="#"><span>Map</span></a>
                 <a href="#/route" ng-click="toggleSidebarClick()"> <span>Route</span></a></a>
             <a href="#"><span>Messages</span></a>
             <a href="#trackinglist" ng-click="toggleSidebarClick()"><span>Tracking list</span></a>
+            <a href="#/login" ng-click="toggleSidebarClick()"><span>Log out</span></a>
             </div>
             <div id="map" ng-view>map</div>
             <div data-loading>Loading...</div>
