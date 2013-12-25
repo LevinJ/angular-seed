@@ -44,6 +44,7 @@ app.use(app.router);
 require('./server/controllers/usercontroller.js')(app);
 require('./server/controllers/testcontroller.js')(app);
 require('./server/controllers/mapcontroller.js')(app);
+require('./server/controllers/logcontroller.js')(app);
 
 
 app.set('port', process.env.PORT || 8002);

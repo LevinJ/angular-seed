@@ -36,12 +36,3 @@ db.bind('trackinglist', {
 );
     
 module.exports = db.trackinglist;    
-
-//var postData = {user: 'user1', trackinglist: ['user2','user1']};
-//db.trackinglist.insertTrackinglist(postData, function() {
-//});
-//
-//queryParams={};
-//queryParams.user = "user1";
-//db.trackinglist.qeuryTrackingList(queryParams, function() {
-//});
