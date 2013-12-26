@@ -48,13 +48,13 @@
          </div>
          <div id="container" ng-controller="ContentCtrl">
             <div id="slider" ng-show="togglesidebar">
-                <a href="#"><span>Map</span></a>
+                <a href="#/home" ng-click="toggleSidebarClick()"><span>Map</span></a>
                 <a href="#/route" ng-click="toggleSidebarClick()"> <span>Route</span></a></a>
             <a href="#"><span>Messages</span></a>
             <a href="#trackinglist" ng-click="toggleSidebarClick()"><span>Tracking list</span></a>
-            <a href="#/login" ng-click="toggleSidebarClick()"><span>Log out</span></a>
+            <a href="#" ng-click="logout()"><span>Log out</span></a>
             </div>
-            <div id="map" ng-view>map</div>
+            <div ng-view>partialpage</div>
             <div data-loading>Loading...</div>
         </div>
 
@@ -77,6 +77,6 @@
          <script src="js/mapcontroller.js"></script>
         <script src="js/filters.js"></script>
         <script src="js/directives.js"></script>
-        <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=A7dfcf11e6de6b76103a36fdb226cf01"></script>--> 
+        <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=A7dfcf11e6de6b76103a36fdb226cf01"></script> 
     </body>
 </html>

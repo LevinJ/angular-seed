@@ -9,7 +9,7 @@ angular.module('myApp.services').factory('TrasmitPosition', ['$http', function($
         return {
             get: function(queryParams) {
                 return $http.get((g_webhostbaseurl + 'position'),
-                {params: queryParams});
+                        {params: queryParams});
             },
             post: function(position) {
                 var url = g_webhostbaseurl + 'position';
@@ -22,7 +22,7 @@ angular.module('myApp.services').factory('TrasmitTrackingList', ['$http', functi
         return {
             get: function(queryParams) {
                 return $http.get((g_webhostbaseurl + 'trackinglist'),
-                {params: queryParams});
+                        {params: queryParams});
             },
             post: function(postData) {
                 var url = g_webhostbaseurl + 'trackinglist';
@@ -30,8 +30,36 @@ angular.module('myApp.services').factory('TrasmitTrackingList', ['$http', functi
             }
         };
     }]);
+angular.module('myApp.services').factory('BaiduMap', ['$http', function($http) {
+        var map;
+        var markerlist = [];
+        return {
+            showBase: function() {
+                $('#map').height(function(index, height) {
+                    return window.innerHeight - $(this).offset().top;
+                });
+                map = new BMap.Map("map");          // 创建地图实例  
+                var point = new BMap.Point(121.5000, 31.2000);//shanghai
+                map.centerAndZoom(point, 13);                 // 初始化地图，设置中心点坐标和地图级别  
+                map.addControl(new BMap.NavigationControl());
+                map.addControl(new BMap.ScaleControl());
+                map.addControl(new BMap.OverviewMapControl());
+                map.addControl(new BMap.MapTypeControl());
+            },
+            showMarker: function(pos) {
+                var crd = pos.coords;
+                var point = new BMap.Point(crd.longitude, crd.latitude);
+                BMap.Convertor.translate(point, 0, function(point) {
+                    var marker = new BMap.Marker(point);        // 创建标注    
+                    map.addOverlay(marker);
+                    map.centerAndZoom(point, 18);                 // 初始化地图，设置中心点坐标和地图级别  
+                    markerlist.push(marker);
+                });
+            }
+        };
+    }]);
 angular.module('myApp.services').factory('GetPosition', ['$http', '$rootScope', '$q', function($http, $rootScope, $q) {
-        var timeoutVal = 5 * 1000;
+        var timeoutVal = 5 * 1000*2;
         var options = {
             enableHighAccuracy: true,
             timeout: timeoutVal,
