@@ -11,15 +11,15 @@
     /*overflow: scroll;*/
     color: white;
     z-index: 1;
-    margin-top:-18px;
+    /*margin-top:-18px;*/
 }
 #slider span{
    padding: 10px;
-    display:         block;
-  border-bottom-width: 1px;
+   display:         block;
+   border-bottom-width: 1px;
    border-bottom-color: white;
    border-bottom-style: solid;
 }
-#map{
-    /*background:green;*/
+.header-bar{
+    padding: 5px;
 }

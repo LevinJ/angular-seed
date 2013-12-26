@@ -20,7 +20,7 @@ describe('controllers', function() {
             should.exist(res);
 //            console.dir(err);
 //            console.dir(res.body);
-////            res.body.result.length.should.equal(9);
+            res.body.result.length.should.equal(0);
             done();
         });
     });
