@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-var unittestenv = false;
+var unittestenv = true;
 
 
 var mongoskin = require('mongoskin');

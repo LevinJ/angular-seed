@@ -31,7 +31,12 @@ db.bind('trackinglist', {
                     console.log(result);
                     cb(err,result);
                 });
-    }
+    },
+     removeAll:function(fn){
+		this.remove({}, function (err, doc) {
+				fn(err,doc);
+		});  
+	}
 }
 );
     

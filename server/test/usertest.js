@@ -115,7 +115,19 @@ describe('controllers', function() {
             done();
         });
     });
-
+     it('should detect that a default tracking list including oneself is created', function(done) {
+        request
+                .get('/trackinglist?user=jack')
+                .expect(200)
+                .end(function(err, res) {
+            should.not.exist(err);
+            should.exist(res);
+            should.not.exist(res.body.result.err);
+            res.body.result.user.should.equal('jack');
+            res.body.result.trackinglist[0].should.equal('jack');
+            done();
+        });
+    });
     it('should fail to register a user with  deuplicate name', function(done) {
         postData = {username: 'jack',
             password: "123456", email: 'jian@gmail.com'};
