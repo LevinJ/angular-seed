@@ -15,7 +15,7 @@ function converttoBaiduCord(originallat, originallon, cb){
   console.log("Got response: " + res.statusCode);
   res.on("data", function(chunk) {
       var chunk = JSON.parse(chunk);
-//    console.dir( chunk);
+    console.dir( chunk);
     cb(null, chunk);
   });
 }).on('error', function(e) {
@@ -24,9 +24,30 @@ function converttoBaiduCord(originallat, originallon, cb){
 });
 }
 
+function converttoBaiduAddress(originallat, originallon, cb){
+//   var url = "http://api.map.baidu.com/geocoder/v2/?ak=1940c3a3f8baf51693710c8a33910609&location=39.983424,116.322987&output=json&pois=0";
+    var url = "http://api.map.baidu.com/geocoder/v2/?ak=1940c3a3f8baf51693710c8a33910609&location=" + 
+            originallat + "," + originallon + "&output=json&pois=0";
+    http.get(url, function(res) {
+  console.log("Got response: " + res.statusCode);
+  res.on("data", function(chunk) {
+      var chunk = JSON.parse(chunk);
+    console.dir( chunk);
+//    cb(null, chunk);
+  });
+}).on('error', function(e) {
+  console.log("Got error: " + e.message);
+//  cb("Failed to converttoBaiduCordo");
+});
+    
+}
+
+
+//var url = "http://api.map.baidu.com/geocoder/v2/?address=百度大厦&output=json&ak=1940c3a3f8baf51693710c8a33910609";
 
 
 module.exports = {
-    converttoBaiduCord: converttoBaiduCord
+    converttoBaiduCord: converttoBaiduCord,
+    converttoBaiduAddress:converttoBaiduAddress
 };
 
