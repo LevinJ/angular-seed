@@ -24,7 +24,13 @@ db.bind('positions', {
             console.dir(err);
             console.dir(result);
         });
-    }
+    },
+    removeAll:function(fn){
+		this.remove({}, function (err, doc) {
+				fn(err,doc);
+		});  
+	}
+
 }
 );
 //var queryParams = {};

@@ -12,10 +12,10 @@ function converttoBaiduCord(originallat, originallon, cb){
     var url = "http://api.map.baidu.com/ag/coord/convert?from=0&to=4&x="+ originallon
     + "&y=" +  originallat;
     http.get(url, function(res) {
-  console.log("Got response: " + res.statusCode);
+//  console.log("Got response: " + res.statusCode);
   res.on("data", function(chunk) {
       var chunk = JSON.parse(chunk);
-    console.dir( chunk);
+//    console.dir( chunk);
     cb(null, chunk);
   });
 }).on('error', function(e) {
