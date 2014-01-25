@@ -4,14 +4,16 @@
  * and open the template in the editor.
  */
 
-var unittestenv = true;
+var unittestenv = false;
 
 
 var mongoskin = require('mongoskin');
 var dbConnection;
 if(unittestenv){
+    console.log("using test db");
    dbConnection = mongoskin.db('localhost:27017/geotrackerdb_test?auto_reconnect=true', {safe: true});
 }else{
+    console.log("using real db");
     dbConnection = mongoskin.db('localhost:27017/geotrackerdb?auto_reconnect=true', {safe: true});
 }
 module.exports = {
